@@ -51,7 +51,10 @@ article hr ~ p {
 
 article hr ~ p strong{
 text-decoration: underline;
+text-decoration-thickness: 0.125em;
+text-decoration-style:solid;
 text-underline-offset: 0.25em;
+-webkit-text-stroke: 0.5px 
 }
 
 /* Global type + selection */

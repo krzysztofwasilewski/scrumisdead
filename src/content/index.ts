@@ -16,12 +16,12 @@ const frontmatterData: Record<string, Omit<PostMeta, "slug">> = {
     excerpt:
       "Daily rituals became theater. Here's how to reclaim intent without the script.",
   },
-  "deliverables-are-delusions": {
-    title: "Deliverables Are Delusions",
+  "scope-delusion": {
+    title: "The Scope Delusion",
     date: "2025-07-02",
     tag: "culture",
     excerpt:
-      "Outcomes over outputs: a field manual for wrecking your status reports (and loving it).",
+      "When scope is locked from the start, incremental delivery becomes a joke. Here's why honesty matters.",
   },
 };
 

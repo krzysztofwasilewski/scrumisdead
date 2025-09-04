@@ -28,7 +28,7 @@ export default function Layout() {
                 >
                   <Skull className="h-5 w-5 text-accent" />
                 </motion.div>
-                ANARCHIC
+                UNAGILE.ME
               </Link>
             </motion.div>
             <nav className="flex items-center gap-6 text-sm">
@@ -67,7 +67,7 @@ export default function Layout() {
         <div className="mx-auto max-w-6xl px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-zinc-400">
           <div>
             <div className="flex items-center gap-2 font-black tracking-widest uppercase">
-              <Skull className="h-4 w-4 text-accent" /> ANARCHIC
+              <Skull className="h-4 w-4 text-accent" /> UNAGILE.ME
             </div>
             <p className="mt-3 max-w-sm">
               No roadmaps, only feedback loops. No ceremonies, only

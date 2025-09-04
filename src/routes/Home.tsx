@@ -249,15 +249,9 @@ const FeaturedCard: React.FC<{
 };
 
 const Marquee: React.FC = () => {
-  const [speed, setSpeed] = React.useState(24);
   const [isGlitching, setIsGlitching] = React.useState(false);
 
   React.useEffect(() => {
-    // Random speed variations
-    const speedInterval = setInterval(() => {
-      setSpeed(20 + Math.random() * 8); // 20-28 seconds
-    }, 5000 + Math.random() * 10000);
-
     // Random glitch effects
     const glitchInterval = setInterval(() => {
       if (Math.random() < 0.15) {
@@ -268,7 +262,6 @@ const Marquee: React.FC = () => {
     }, 3000 + Math.random() * 5000);
 
     return () => {
-      clearInterval(speedInterval);
       clearInterval(glitchInterval);
     };
   }, []);
@@ -282,8 +275,7 @@ const Marquee: React.FC = () => {
         transition={{
           repeat: Infinity,
           ease: "linear",
-          duration: speed,
-          repeatDelay: Math.random() * 2,
+          duration: 20,
         }}
         style={{
           filter: isGlitching
@@ -349,7 +341,7 @@ export default function Home() {
             >
               <Skull className="h-5 w-5 text-accent" />
               <span className="sr-only">Anarchic Blog</span>
-              <GlitchText text="ANARCHIC" />
+              <GlitchText text="SCRUM IS DEAD" />
             </a>
             <nav className="hidden md:flex items-center gap-6 text-sm">
               <a className="hover:text-white text-zinc-300" href="#">
@@ -396,8 +388,8 @@ export default function Home() {
               </motion.h1>
               <p className="mt-6 max-w-2xl text-lg text-zinc-300">
                 Essays & artefacts from the edges of product and
-                engineering—where process melts and learning hardens. Break the
-                frame. Keep the signal.
+                engineering — where process melts and learning hardens. Break
+                the frame. Keep the signal.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button>Start Reading</Button>
