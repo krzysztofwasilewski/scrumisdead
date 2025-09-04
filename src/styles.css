@@ -1,0 +1,25 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global type + selection */
+::selection { background: #be123c; color: white; }
+
+body { color: rgb(228 228 231); } /* zinc-200 */
+
+
+:root {
+  --bg1: #000000;
+  --bg2: #18181b; /* zinc-900 */
+  --bg3: #7f1d1d; /* default deep red */
+  --accent: #be123c; /* rose-700 */
+}
+[data-palette="bile"] { --bg3: #3f6212; --accent: #84cc16; }
+[data-palette="hazard"] { --bg3: #7c2d12; --accent: #f59e0b; }
+[data-palette="xerox"] { --bg3: #1e3a8a; --accent: #60a5fa; }
+
+.bg-grad-split { background-image: linear-gradient(to bottom right, var(--bg1), var(--bg2), var(--bg3)); }
+.text-accent { color: var(--accent); }
+.bg-accent { background-color: var(--accent); }
+.border-accent { border-color: var(--accent); }
