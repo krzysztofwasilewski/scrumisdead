@@ -21,15 +21,42 @@ const posts = listPosts();
 
 const HoverJitter: React.FC<
   React.PropsWithChildren<{ className?: string }>
-> = ({ children, className }) => (
-  <motion.span
-    className={className}
-    whileHover={{ rotate: [0, -2, 2, 0], x: [0, -2, 2, 0] }}
-    transition={{ duration: 0.25 }}
-  >
-    {children}
-  </motion.span>
-);
+> = ({ children, className }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  return (
+    <motion.span
+      className={className}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={{
+        rotate: [0, -3, 3, -2, 2, 0],
+        x: [0, -3, 3, -1, 1, 0],
+        y: [0, -1, 1, 0],
+        scale: [1, 1.02, 0.98, 1.01, 0.99, 1],
+      }}
+      animate={
+        isHovered
+          ? {
+              filter: [
+                "hue-rotate(0deg) saturate(1)",
+                "hue-rotate(10deg) saturate(1.2)",
+                "hue-rotate(-10deg) saturate(1.1)",
+                "hue-rotate(0deg) saturate(1)",
+              ],
+            }
+          : {}
+      }
+      transition={{
+        duration: 0.4,
+        ease: "easeInOut",
+        times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+      }}
+    >
+      {children}
+    </motion.span>
+  );
+};
 
 const Background = () => (
   <div className="pointer-events-none fixed inset-0 -z-10">
@@ -44,6 +71,7 @@ const Background = () => (
         animation: "grain 1.2s steps(6) infinite",
       }}
     />
+    <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_50%_50%,rgba(245,158,11,0.1)_0%,transparent_50%)]" />
     <style>{`
       @keyframes grain {
         0%{transform:translate(0,0)} 20%{transform:translate(-5%, -10%)} 40%{transform:translate(-15%, 5%)} 60%{transform:translate(7%, -25%)} 80%{transform:translate(-5%, 25%)} 100%{transform:translate(0,0)}
@@ -55,26 +83,76 @@ const Background = () => (
 const GlitchText: React.FC<{ text: string; className?: string }> = ({
   text,
   className,
-}) => (
-  <div
-    className={`relative inline-block select-none ${className ?? ""}`}
-    aria-label={text}
-  >
-    <span className="relative z-10">{text}</span>
-    <span
-      className="absolute inset-0 translate-x-[1px] translate-y-[-1px] text-rose-500 blur-[0.5px] opacity-70"
-      aria-hidden
+}) => {
+  const [isGlitching, setIsGlitching] = React.useState(false);
+  const [glitchOffset, setGlitchOffset] = React.useState({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (Math.random() < 0.1) {
+        // 10% chance to glitch
+        setIsGlitching(true);
+        setGlitchOffset({
+          x: (Math.random() - 0.5) * 4,
+          y: (Math.random() - 0.5) * 2,
+        });
+        setTimeout(() => {
+          setIsGlitching(false);
+          setGlitchOffset({ x: 0, y: 0 });
+        }, 100 + Math.random() * 200);
+      }
+    }, 2000 + Math.random() * 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div
+      className={`relative inline-block select-none ${className ?? ""}`}
+      aria-label={text}
     >
-      {text}
-    </span>
-    <span
-      className="absolute inset-0 translate-x-[-1px] translate-y-[1px] text-cyan-400 blur-[0.5px] opacity-70"
-      aria-hidden
-    >
-      {text}
-    </span>
-  </div>
-);
+      <span className="relative z-10">{text}</span>
+      <span
+        className="absolute inset-0 text-rose-500 blur-[0.5px] opacity-70 transition-all duration-75"
+        style={{
+          transform: `translate(${1 + glitchOffset.x}px, ${
+            -1 + glitchOffset.y
+          }px)`,
+          filter: isGlitching ? "hue-rotate(90deg) saturate(2)" : "none",
+        }}
+        aria-hidden
+      >
+        {text}
+      </span>
+      <span
+        className="absolute inset-0 text-cyan-400 blur-[0.5px] opacity-70 transition-all duration-75"
+        style={{
+          transform: `translate(${-1 + glitchOffset.x}px, ${
+            1 + glitchOffset.y
+          }px)`,
+          filter: isGlitching ? "hue-rotate(-90deg) saturate(2)" : "none",
+        }}
+        aria-hidden
+      >
+        {text}
+      </span>
+      {isGlitching && (
+        <span
+          className="absolute inset-0 text-lime-400 blur-[1px] opacity-50"
+          style={{
+            transform: `translate(${glitchOffset.x * 2}px, ${
+              glitchOffset.y * 2
+            }px)`,
+            filter: "hue-rotate(180deg) saturate(3)",
+          }}
+          aria-hidden
+        >
+          {text}
+        </span>
+      )}
+    </div>
+  );
+};
 
 const JaggedDivider = () => (
   <svg
@@ -93,59 +171,140 @@ const FeaturedCard: React.FC<{
   tag?: string;
   slug: string;
   index: number;
-}> = ({ title, excerpt, tag, slug, index }) => (
-  <motion.article
-    className="relative"
-    initial={{ opacity: 0, y: 30, rotate: index % 2 === 0 ? -2 : 3 }}
-    whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1 : 2 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.5, delay: 0.05 * index }}
-  >
-    <Card className="group border-rose-700/60 bg-zinc-900/60 backdrop-blur-sm shadow-2xl shadow-black/30 hover:-rotate-1 hover:scale-[1.01] transition-all duration-300">
-      <CardContent className="p-6">
-        {tag && (
-          <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-widest text-accent">
-            <Flame className="h-3.5 w-3.5" /> {tag}
-          </div>
-        )}
-        <h3 className="text-xl md:text-2xl font-black text-zinc-100 leading-tight">
-          <HoverJitter>
-            <GlitchText text={title} />
-          </HoverJitter>
-        </h3>
-        {excerpt && <p className="mt-3 text-zinc-300/90">{excerpt}</p>}
-        <div className="mt-5">
-          <Link to={`/post/${slug}`}>
-            <Button variant="outline">Read Manifesto</Button>
-          </Link>
-        </div>
-      </CardContent>
-    </Card>
-    <div className="absolute -top-2 -left-2 rotate-[-6deg]">
-      <div className="h-6 w-20 bg-rose-700/80 shadow-md" />
-    </div>
-  </motion.article>
-);
+}> = ({ title, excerpt, tag, slug, index }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [isGlitching, setIsGlitching] = React.useState(false);
 
-const Marquee: React.FC = () => (
-  <div className="relative overflow-hidden border-y border-accent bg-black">
-    <div className="absolute inset-0 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" />
-    <motion.div
-      className="flex whitespace-nowrap py-2 text-sm md:text-base font-mono tracking-wider"
-      animate={{ x: [0, -800] }}
-      transition={{ repeat: Infinity, ease: "linear", duration: 24 }}
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if (Math.random() < 0.05) {
+        // 5% chance to glitch
+        setIsGlitching(true);
+        setTimeout(() => setIsGlitching(false), 150 + Math.random() * 200);
+      }
+    }, 4000 + Math.random() * 6000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <motion.article
+      className="relative"
+      initial={{ opacity: 0, y: 30, rotate: index % 2 === 0 ? -2 : 3 }}
+      whileInView={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1 : 2 }}
+      viewport={{ once: true, amount: 0.3 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      whileHover={{
+        rotate: [0, -2, 2, -1, 1, 0],
+        scale: [1, 1.02, 0.98, 1.01, 1],
+        y: [0, -2, 2, 0],
+      }}
+      animate={
+        isGlitching
+          ? {
+              x: [0, -1, 1, 0],
+              y: [0, -1, 1, 0],
+              rotate: [0, -0.5, 0.5, 0],
+            }
+          : {}
+      }
+      transition={{
+        duration: isGlitching ? 0.1 : 0.5,
+        delay: isGlitching ? 0 : 0.05 * index,
+      }}
     >
-      {[...Array(6)].map((_, i) => (
-        <span key={i} className="mx-6 text-accent">
-          ✶ no gods • no masters • no roadmaps • only signals
-        </span>
-      ))}
-    </motion.div>
-  </div>
-);
+      <div
+        className={`group border-rose-700/60 bg-zinc-900/60 backdrop-blur-sm shadow-2xl shadow-black/30 transition-all duration-300 rounded-2xl border shadow ${
+          isHovered ? "border-rose-500/80 shadow-rose-500/20" : ""
+        } ${isGlitching ? "border-cyan-400/60 shadow-cyan-400/20" : ""}`}
+        style={{
+          filter: isGlitching ? "hue-rotate(90deg) saturate(1.2)" : "none",
+        }}
+      >
+        <CardContent className="p-6">
+          {tag && (
+            <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-widest text-accent">
+              <Flame className="h-3.5 w-3.5" /> {tag}
+            </div>
+          )}
+          <h3 className="text-xl md:text-2xl font-black text-zinc-100 leading-tight">
+            <HoverJitter>
+              <GlitchText text={title} />
+            </HoverJitter>
+          </h3>
+          {excerpt && <p className="mt-3 text-zinc-300/90">{excerpt}</p>}
+          <div className="mt-5">
+            <Link to={`/post/${slug}`}>
+              <Button variant="outline">Read Manifesto</Button>
+            </Link>
+          </div>
+        </CardContent>
+      </div>
+      <div className="absolute -top-2 -left-2 rotate-[-6deg]">
+        <div className="h-6 w-20 bg-rose-700/80 shadow-md" />
+      </div>
+    </motion.article>
+  );
+};
+
+const Marquee: React.FC = () => {
+  const [speed, setSpeed] = React.useState(24);
+  const [isGlitching, setIsGlitching] = React.useState(false);
+
+  React.useEffect(() => {
+    // Random speed variations
+    const speedInterval = setInterval(() => {
+      setSpeed(20 + Math.random() * 8); // 20-28 seconds
+    }, 5000 + Math.random() * 10000);
+
+    // Random glitch effects
+    const glitchInterval = setInterval(() => {
+      if (Math.random() < 0.15) {
+        // 15% chance
+        setIsGlitching(true);
+        setTimeout(() => setIsGlitching(false), 200 + Math.random() * 300);
+      }
+    }, 3000 + Math.random() * 5000);
+
+    return () => {
+      clearInterval(speedInterval);
+      clearInterval(glitchInterval);
+    };
+  }, []);
+
+  return (
+    <div className="relative overflow-hidden border-y border-accent bg-black">
+      <div className="absolute inset-0 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" />
+      <motion.div
+        className="flex whitespace-nowrap py-2 text-sm md:text-base font-mono tracking-wider"
+        animate={{ x: [0, -800] }}
+        transition={{
+          repeat: Infinity,
+          ease: "linear",
+          duration: speed,
+          repeatDelay: Math.random() * 2,
+        }}
+        style={{
+          filter: isGlitching
+            ? "hue-rotate(180deg) saturate(2) contrast(1.5)"
+            : "none",
+          transform: isGlitching ? "skewX(2deg)" : "skewX(0deg)",
+        }}
+      >
+        {[...Array(6)].map((_, i) => (
+          <span key={i} className="mx-6 text-accent">
+            ✶ no gods • no masters • no roadmaps • only signals
+          </span>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
 
 export default function Home() {
   const [index, setIndex] = React.useState(0);
+  const [isShaking, setIsShaking] = React.useState(false);
   const controls = useAnimation();
 
   React.useEffect(() => {
@@ -156,12 +315,29 @@ export default function Home() {
         skewX: [0, -2, 0],
         transition: { duration: 0.45 },
       });
+
+      // Random screen shake
+      if (Math.random() < 0.3) {
+        setIsShaking(true);
+        setTimeout(() => setIsShaking(false), 200 + Math.random() * 300);
+      }
     }, 2500);
     return () => clearInterval(id);
   }, [controls]);
 
   return (
-    <main className="min-h-screen text-zinc-200">
+    <motion.main
+      className="min-h-screen text-zinc-200"
+      animate={
+        isShaking
+          ? {
+              x: [0, -2, 2, -1, 1, 0],
+              y: [0, -1, 1, 0],
+            }
+          : {}
+      }
+      transition={{ duration: 0.1 }}
+    >
       <Background />
 
       <header className="sticky top-0 z-40 border-b border-accent/50 bg-black/60 backdrop-blur">
@@ -336,6 +512,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </main>
+    </motion.main>
   );
 }
