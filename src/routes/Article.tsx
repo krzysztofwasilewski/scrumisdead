@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { getPost } from "../content";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXComponents } from "../mdx/components";
@@ -36,54 +37,101 @@ export default function Article() {
 
   return (
     <main className="min-h-screen">
-      <div
+      <motion.div
         className="bg-grad-split border-b border-accent/50"
         style={{ fontFamily: "inherit" }}
+        initial={{ opacity: 0, y: -50, rotateX: -15 }}
+        animate={{ opacity: 1, y: 0, rotateX: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <div className="mx-auto max-w-4xl px-4 py-16">
-          <p
+        <motion.div
+          className="mx-auto max-w-4xl px-4 py-16"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <motion.p
             className="uppercase tracking-widest text-xs text-accent"
             style={{
               fontFamily: "inherit",
               letterSpacing: "normal",
               lineHeight: "normal",
             }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
           >
             {tag}
-          </p>
-          <h1
+          </motion.p>
+          <motion.h1
             className="mt-2 text-[12vw] md:text-[6rem] leading-[0.85] font-black uppercase"
             style={{
               fontFamily: "inherit",
               letterSpacing: "normal",
               lineHeight: "normal",
             }}
+            initial={{ opacity: 0, y: 30, rotate: -2 }}
+            animate={{ opacity: 1, y: 0, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            whileHover={{
+              scale: [1, 1.02, 0.98, 1.01, 1],
+              rotate: [0, -1, 1, 0],
+              filter: "hue-rotate(10deg) saturate(1.1)",
+            }}
           >
             {title}
-          </h1>
-          <p
+          </motion.h1>
+          <motion.p
             className="mt-2 text-zinc-400"
             style={{
               fontFamily: "inherit",
               letterSpacing: "normal",
               lineHeight: "normal",
             }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.8 }}
           >
             {new Date(date).toLocaleDateString()}
-          </p>
-        </div>
-        <JaggedDivider />
-      </div>
-      <article className="mx-auto max-w-3xl px-4 py-10">
+          </motion.p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.6, delay: 1 }}
+        >
+          <JaggedDivider />
+        </motion.div>
+      </motion.div>
+      <motion.article
+        className="mx-auto max-w-3xl px-4 py-10"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1.2 }}
+      >
         <MDXProvider components={MDXComponents}>
           <Mdx />
         </MDXProvider>
-        <div className="mt-12">
-          <Link to="/archive" className="underline text-accent">
-            ← Archive
-          </Link>
-        </div>
-      </article>
+        <motion.div
+          className="mt-12"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 1.6 }}
+        >
+          <motion.div
+            whileHover={{
+              scale: [1, 1.05, 0.95, 1],
+              x: [0, -5, 5, 0],
+              filter: "hue-rotate(15deg) saturate(1.2)",
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <Link to="/archive" className="underline text-accent">
+              ← Archive
+            </Link>
+          </motion.div>
+        </motion.div>
+      </motion.article>
     </main>
   );
 }
