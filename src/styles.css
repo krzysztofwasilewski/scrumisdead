@@ -56,8 +56,8 @@ body { color: rgb(228 228 231); } /* zinc-200 */
 :root {
   --bg1: #000000;
   --bg2: #18181b; /* zinc-900 */
-  --bg3: #7f1d1d; /* default deep red */
-  --accent: #be123c; /* rose-700 */
+  --bg3: #7c2d12; /* hazard orange background */
+  --accent: #f59e0b; /* hazard yellow */
 }
 [data-palette="bile"] { --bg3: #3f6212; --accent: #84cc16; }
 [data-palette="hazard"] { --bg3: #7c2d12; --accent: #f59e0b; }
