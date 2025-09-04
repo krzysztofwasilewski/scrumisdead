@@ -12,9 +12,6 @@ const SLOGANS = [
   "burn the backlog",
   "certifications are cargo cult",
   "sprint to nowhere",
-  "plan less, learn more",
-  "deadline is a myth",
-  "ship ugly, learn fast",
 ];
 
 // Get actual posts from content system
@@ -246,20 +243,21 @@ export default function Home() {
                       <div className="p-6">
                         <h3 className="text-3xl font-black uppercase leading-none">
                           <HoverJitter>
-                            <GlitchText text="Poster Art" />
+                            <GlitchText text="The Scrum Art" />
                           </HoverJitter>
                         </h3>
                         <p className="mt-3 text-sm text-zinc-300/90">
-                          Angular grids, torn edges, loud type. Motion as
-                          punctuation, not decoration.
+                          Meetings, meetings, meetings. A million years past the
+                          deadline.
                         </p>
                       </div>
                       <JaggedDivider />
                       <div className="p-6">
                         <ul className="space-y-1 text-sm text-zinc-400">
-                          <li>• Skewed layouts</li>
-                          <li>• Grain + halftone textures</li>
-                          <li>• Micro‑glitch on hover</li>
+                          <li>• Start with the login screen</li>
+                          <li>• Leave the risky stuff for the last sprint</li>
+                          <li>• Collect technical debt</li>
+                          <li>• Pass rate 20%</li>
                         </ul>
                       </div>
                     </CardContent>
