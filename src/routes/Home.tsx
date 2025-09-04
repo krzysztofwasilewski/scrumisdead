@@ -12,6 +12,8 @@ const SLOGANS = [
   "burn the backlog",
   "certifications are cargo cult",
   "sprint to nowhere",
+  "Scope is fixed",
+  "Flexible scope is a lie",
 ];
 
 // Get actual posts from content system

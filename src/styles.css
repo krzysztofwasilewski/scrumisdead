@@ -32,6 +32,8 @@ article blockquote {
 
 article blockquote strong {
   text-decoration: underline;
+  text-underline-offset: 0.125em;
+  
 }
 
 hr {
@@ -45,6 +47,11 @@ article hr ~ p {
   line-height: 2.5 !important;
   font-feature-settings: 'liga' 0; /* Disable ligatures for true typewriter feel */
   font-size: 1.25rem;
+}
+
+article hr ~ p strong{
+text-decoration: underline;
+text-underline-offset: 0.25em;
 }
 
 /* Global type + selection */
