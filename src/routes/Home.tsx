@@ -237,9 +237,7 @@ export default function Home() {
               <a className="hover:text-white text-zinc-300" href="#">
                 Posts
               </a>
-              <a className="hover:text-white text-zinc-300" href="#">
-                About
-              </a>
+
               <a className="hover:text-white text-zinc-300" href="#">
                 RSS
               </a>
