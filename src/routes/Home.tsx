@@ -59,7 +59,10 @@ const HoverJitter: React.FC<
 };
 
 const Background = () => (
-  <div className="pointer-events-none fixed inset-0 -z-10">
+  <div
+    className="pointer-events-none fixed inset-0 -z-10"
+    style={{ willChange: "transform" }}
+  >
     <div className="absolute inset-0 bg-gradient-to-br bg-grad-split" />
     <div className="absolute inset-0 mix-blend-overlay opacity-40 [background-image:radial-gradient(black_1px,transparent_1px)] [background-size:3px_3px]" />
     <div
@@ -69,12 +72,33 @@ const Background = () => (
           `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><filter id=\"n\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" stitchTiles=\"stitch\"/></filter><rect width=\"100%\" height=\"100%\" filter=\"url(#n)\" opacity=\"0.25\"/></svg>`
         )}')`,
         animation: "grain 1.2s steps(6) infinite",
+        willChange: "transform",
+        transform: "translateZ(0)", // Force hardware acceleration
       }}
     />
     <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_50%_50%,rgba(245,158,11,0.1)_0%,transparent_50%)]" />
     <style>{`
       @keyframes grain {
         0%{transform:translate(0,0)} 20%{transform:translate(-5%, -10%)} 40%{transform:translate(-15%, 5%)} 60%{transform:translate(7%, -25%)} 80%{transform:translate(-5%, 25%)} 100%{transform:translate(0,0)}
+      }
+      
+      /* Hide scrollbars */
+      html {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+      }
+      
+      html::-webkit-scrollbar {
+        display: none; /* WebKit */
+      }
+      
+      body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+      }
+      
+      body::-webkit-scrollbar {
+        display: none; /* WebKit */
       }
     `}</style>
   </div>
