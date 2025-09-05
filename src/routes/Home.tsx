@@ -80,80 +80,6 @@ const Background = () => (
   </div>
 );
 
-const GlitchText: React.FC<{ text: string; className?: string }> = ({
-  text,
-  className,
-}) => {
-  const [isGlitching, setIsGlitching] = React.useState(false);
-  const [glitchOffset, setGlitchOffset] = React.useState({ x: 0, y: 0 });
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (Math.random() < 0.1) {
-        // 10% chance to glitch
-        setIsGlitching(true);
-        setGlitchOffset({
-          x: (Math.random() - 0.5) * 4,
-          y: (Math.random() - 0.5) * 2,
-        });
-        setTimeout(() => {
-          setIsGlitching(false);
-          setGlitchOffset({ x: 0, y: 0 });
-        }, 100 + Math.random() * 200);
-      }
-    }, 2000 + Math.random() * 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div
-      className={`relative inline-block select-none ${className ?? ""}`}
-      aria-label={text}
-    >
-      <span className="relative z-10">{text}</span>
-      <span
-        className="absolute inset-0 text-rose-500 blur-[0.5px] opacity-70 transition-all duration-75"
-        style={{
-          transform: `translate(${1 + glitchOffset.x}px, ${
-            -1 + glitchOffset.y
-          }px)`,
-          filter: isGlitching ? "hue-rotate(90deg) saturate(2)" : "none",
-        }}
-        aria-hidden
-      >
-        {text}
-      </span>
-      <span
-        className="absolute inset-0 text-cyan-400 blur-[0.5px] opacity-70 transition-all duration-75"
-        style={{
-          transform: `translate(${-1 + glitchOffset.x}px, ${
-            1 + glitchOffset.y
-          }px)`,
-          filter: isGlitching ? "hue-rotate(-90deg) saturate(2)" : "none",
-        }}
-        aria-hidden
-      >
-        {text}
-      </span>
-      {isGlitching && (
-        <span
-          className="absolute inset-0 text-lime-400 blur-[1px] opacity-50"
-          style={{
-            transform: `translate(${glitchOffset.x * 2}px, ${
-              glitchOffset.y * 2
-            }px)`,
-            filter: "hue-rotate(180deg) saturate(3)",
-          }}
-          aria-hidden
-        >
-          {text}
-        </span>
-      )}
-    </div>
-  );
-};
-
 const JaggedDivider = () => (
   <svg
     className="w-full h-8 text-accent"
@@ -173,19 +99,6 @@ const FeaturedCard: React.FC<{
   index: number;
 }> = ({ title, excerpt, tag, slug, index }) => {
   const [isHovered, setIsHovered] = React.useState(false);
-  const [isGlitching, setIsGlitching] = React.useState(false);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (Math.random() < 0.05) {
-        // 5% chance to glitch
-        setIsGlitching(true);
-        setTimeout(() => setIsGlitching(false), 150 + Math.random() * 200);
-      }
-    }, 4000 + Math.random() * 6000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <motion.article
@@ -200,27 +113,15 @@ const FeaturedCard: React.FC<{
         scale: [1, 1.02, 0.98, 1.01, 1],
         y: [0, -2, 2, 0],
       }}
-      animate={
-        isGlitching
-          ? {
-              x: [0, -1, 1, 0],
-              y: [0, -1, 1, 0],
-              rotate: [0, -0.5, 0.5, 0],
-            }
-          : {}
-      }
       transition={{
-        duration: isGlitching ? 0.1 : 0.5,
-        delay: isGlitching ? 0 : 0.05 * index,
+        duration: 0.5,
+        delay: 0.05 * index,
       }}
     >
       <div
         className={`group border-rose-700/60 bg-zinc-900/60 backdrop-blur-sm shadow-2xl shadow-black/30 transition-all duration-300 rounded-2xl border shadow ${
           isHovered ? "border-rose-500/80 shadow-rose-500/20" : ""
-        } ${isGlitching ? "border-cyan-400/60 shadow-cyan-400/20" : ""}`}
-        style={{
-          filter: isGlitching ? "hue-rotate(90deg) saturate(1.2)" : "none",
-        }}
+        }`}
       >
         <CardContent className="p-6">
           {tag && (
@@ -229,9 +130,7 @@ const FeaturedCard: React.FC<{
             </div>
           )}
           <h3 className="text-xl md:text-2xl font-black text-zinc-100 leading-tight">
-            <HoverJitter>
-              <GlitchText text={title} />
-            </HoverJitter>
+            <HoverJitter>{title}</HoverJitter>
           </h3>
           {excerpt && <p className="mt-3 text-zinc-300/90">{excerpt}</p>}
           <div className="mt-5">
@@ -249,23 +148,6 @@ const FeaturedCard: React.FC<{
 };
 
 const Marquee: React.FC = () => {
-  const [isGlitching, setIsGlitching] = React.useState(false);
-
-  React.useEffect(() => {
-    // Random glitch effects
-    const glitchInterval = setInterval(() => {
-      if (Math.random() < 0.15) {
-        // 15% chance
-        setIsGlitching(true);
-        setTimeout(() => setIsGlitching(false), 200 + Math.random() * 300);
-      }
-    }, 3000 + Math.random() * 5000);
-
-    return () => {
-      clearInterval(glitchInterval);
-    };
-  }, []);
-
   return (
     <div className="relative overflow-hidden border-y border-accent bg-black">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" />
@@ -276,12 +158,6 @@ const Marquee: React.FC = () => {
           repeat: Infinity,
           ease: "linear",
           duration: 20,
-        }}
-        style={{
-          filter: isGlitching
-            ? "hue-rotate(180deg) saturate(2) contrast(1.5)"
-            : "none",
-          transform: isGlitching ? "skewX(2deg)" : "skewX(0deg)",
         }}
       >
         {[...Array(6)].map((_, i) => (
@@ -297,7 +173,6 @@ const Marquee: React.FC = () => {
 
 export default function Home() {
   const [index, setIndex] = React.useState(0);
-  const [isShaking, setIsShaking] = React.useState(false);
   const controls = useAnimation();
 
   React.useEffect(() => {
@@ -308,29 +183,12 @@ export default function Home() {
         skewX: [0, -2, 0],
         transition: { duration: 0.45 },
       });
-
-      // Random screen shake
-      if (Math.random() < 0.3) {
-        setIsShaking(true);
-        setTimeout(() => setIsShaking(false), 200 + Math.random() * 300);
-      }
     }, 2500);
     return () => clearInterval(id);
   }, [controls]);
 
   return (
-    <motion.main
-      className="min-h-screen text-zinc-200"
-      animate={
-        isShaking
-          ? {
-              x: [0, -2, 2, -1, 1, 0],
-              y: [0, -1, 1, 0],
-            }
-          : {}
-      }
-      transition={{ duration: 0.1 }}
-    >
+    <motion.main className="min-h-screen text-zinc-200">
       <Background />
 
       <header className="sticky top-0 z-40 border-b border-accent/50 bg-black/60 backdrop-blur">
@@ -342,7 +200,7 @@ export default function Home() {
             >
               <Skull className="h-5 w-5 text-accent" />
               <span className="sr-only">Please unagile me</span>
-              <GlitchText text="SCRUM IS DEAD" />
+              SCRUM IS DEAD
             </a>
             <nav className="hidden md:flex items-center gap-6 text-sm">
               <a className="hover:text-white text-zinc-300" href="#">
@@ -383,7 +241,7 @@ export default function Home() {
                     transition={{ duration: 0.35 }}
                     className="block"
                   >
-                    <GlitchText text={SLOGANS[index]} />
+                    {SLOGANS[index]}
                   </motion.span>
                 </AnimatePresence>
               </motion.h1>
@@ -413,9 +271,7 @@ export default function Home() {
                     <CardContent className="p-0 overflow-hidden">
                       <div className="p-6">
                         <h3 className="text-3xl font-black uppercase leading-none">
-                          <HoverJitter>
-                            <GlitchText text="The Scrum Art" />
-                          </HoverJitter>
+                          <HoverJitter>The Scrum Art</HoverJitter>
                         </h3>
                         <p className="mt-3 text-sm text-zinc-300/90">
                           Meetings, meetings, meetings. A million years past the
