@@ -179,16 +179,35 @@ const FeaturedCard: React.FC<{
 };
 
 const Marquee: React.FC = () => {
+  const [isGlitching, setIsGlitching] = React.useState(false);
+
+  React.useEffect(() => {
+    // Random glitch effects - more frequent and stronger
+    const glitchInterval = setInterval(() => {
+      if (Math.random() < 0.4) {
+        // 40% chance (increased from 25%)
+        setIsGlitching(true);
+        setTimeout(() => setIsGlitching(false), 400 + Math.random() * 600);
+      }
+    }, 1000 + Math.random() * 2000);
+
+    return () => {
+      clearInterval(glitchInterval);
+    };
+  }, []);
+
   return (
     <div className="relative overflow-hidden border-y border-accent bg-black">
       <div className="absolute inset-0 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]" />
-      <motion.div
+      <div
         className="flex whitespace-nowrap py-2 text-sm md:text-base font-mono tracking-wider"
-        animate={{ x: [0, -800] }}
-        transition={{
-          repeat: Infinity,
-          ease: "linear",
-          duration: 20,
+        style={{
+          filter: isGlitching
+            ? "hue-rotate(180deg) saturate(3) contrast(2) brightness(1.2)"
+            : "none",
+          animation: isGlitching
+            ? "marqueeGlitch 20s linear infinite"
+            : "marquee 20s linear infinite",
         }}
       >
         {[...Array(6)].map((_, i) => (
@@ -197,7 +216,36 @@ const Marquee: React.FC = () => {
             management is a lie
           </span>
         ))}
-      </motion.div>
+      </div>
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-800px); }
+        }
+        @keyframes marqueeGlitch {
+          0% { transform: translateX(0) skewX(3deg) translateX(2px); }
+          5% { transform: translateX(-40px) skewX(-2deg) translateX(-1px); }
+          10% { transform: translateX(-80px) skewX(3deg) translateX(2px); }
+          15% { transform: translateX(-120px) skewX(0deg) translateX(0px); }
+          20% { transform: translateX(-160px) skewX(-3deg) translateX(-2px); }
+          25% { transform: translateX(-200px) skewX(2deg) translateX(1px); }
+          30% { transform: translateX(-240px) skewX(0deg) translateX(0px); }
+          35% { transform: translateX(-280px) skewX(3deg) translateX(2px); }
+          40% { transform: translateX(-320px) skewX(-1deg) translateX(-1px); }
+          45% { transform: translateX(-360px) skewX(2deg) translateX(1px); }
+          50% { transform: translateX(-400px) skewX(0deg) translateX(0px); }
+          55% { transform: translateX(-440px) skewX(-3deg) translateX(-2px); }
+          60% { transform: translateX(-480px) skewX(1deg) translateX(1px); }
+          65% { transform: translateX(-520px) skewX(0deg) translateX(0px); }
+          70% { transform: translateX(-560px) skewX(3deg) translateX(2px); }
+          75% { transform: translateX(-600px) skewX(-2deg) translateX(-1px); }
+          80% { transform: translateX(-640px) skewX(0deg) translateX(0px); }
+          85% { transform: translateX(-680px) skewX(2deg) translateX(1px); }
+          90% { transform: translateX(-720px) skewX(-1deg) translateX(-1px); }
+          95% { transform: translateX(-760px) skewX(3deg) translateX(2px); }
+          100% { transform: translateX(-800px) skewX(0deg) translateX(0px); }
+        }
+      `}</style>
     </div>
   );
 };
