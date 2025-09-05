@@ -5,7 +5,7 @@ import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 
 export default defineConfig({
-  base: "/scrumisdead/",
+  base: "./",
   plugins: [
     react(),
     mdx({
