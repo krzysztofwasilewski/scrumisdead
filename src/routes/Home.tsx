@@ -426,10 +426,10 @@ export default function Home() {
                       <div className="p-6">
                         <ul className="space-y-1 text-sm text-zinc-400">
                           <li>
-                            • Make sure your MVP is the best login screen.
+                            • Make sure your MVP has the best login screen.
                           </li>
                           <li>• Leave the innovation for the last sprint.</li>
-                          <li>• Collect technical debt.</li>
+                          <li>• Accumulate technical debt.</li>
                           <li>
                             • Lower the bar to stay on schedule. Pass rate 20%
                             is good enough as long as it's not your KPI

@@ -23,6 +23,13 @@ const frontmatterData: Record<string, Omit<PostMeta, "slug">> = {
     excerpt:
       "When scope is locked from the start, incremental delivery becomes a joke. Here's why honesty matters.",
   },
+  "kanban-is-not-what-you-do": {
+    title: "Kanban Came Cheap",
+    date: "2025-09-05",
+    tag: "process",
+    excerpt:
+      "Kanban isn’t Scrum minus sprints. It’s discipline disguised as flow—and too often, abused as an excuse.",
+  },
 };
 
 const modules = import.meta.glob("../content/*.mdx", { eager: true });
