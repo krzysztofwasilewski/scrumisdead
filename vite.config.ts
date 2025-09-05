@@ -11,4 +11,8 @@ export default defineConfig({
       remarkPlugins: [remarkFrontmatter, remarkGfm],
     }),
   ],
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+  },
 });
