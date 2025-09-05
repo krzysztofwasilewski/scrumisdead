@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="skullGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#be123c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with subtle glow -->
+  <circle cx="16" cy="16" r="15" fill="url(#skullGradient)" opacity="0.9" filter="url(#glow)"/>
+  
+  <!-- Skull shape -->
+  <g fill="#000000" stroke="#f59e0b" stroke-width="0.5">
+    <!-- Skull head -->
+    <ellipse cx="16" cy="18" rx="8" ry="9" fill="#000000"/>
+    
+    <!-- Eye sockets -->
+    <ellipse cx="13" cy="15" rx="2" ry="2.5" fill="#f59e0b"/>
+    <ellipse cx="19" cy="15" rx="2" ry="2.5" fill="#f59e0b"/>
+    
+    <!-- Nose -->
+    <path d="M 16 17 L 15 19 L 17 19 Z" fill="#f59e0b"/>
+    
+    <!-- Teeth -->
+    <rect x="14" y="21" width="1" height="3" fill="#f59e0b"/>
+    <rect x="15.5" y="21" width="1" height="3" fill="#f59e0b"/>
+    <rect x="17" y="21" width="1" height="3" fill="#f59e0b"/>
+    
+    <!-- Cracks for anarchic feel -->
+    <path d="M 8 12 L 12 8" stroke="#be123c" stroke-width="0.8" fill="none"/>
+    <path d="M 24 12 L 20 8" stroke="#be123c" stroke-width="0.8" fill="none"/>
+    <path d="M 16 6 L 16 2" stroke="#be123c" stroke-width="0.8" fill="none"/>
+  </g>
+  
+  <!-- Anarchic symbol overlay -->
+  <g fill="#f59e0b" opacity="0.7">
+    <circle cx="16" cy="16" r="1" fill="#f59e0b"/>
+    <path d="M 16 12 L 20 20 M 16 12 L 12 20" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
+  </g>
+</svg>

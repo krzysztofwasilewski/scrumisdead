@@ -20,6 +20,19 @@ export default function Layout() {
   return (
     <div className="min-h-screen text-zinc-200">
       <Helmet>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
