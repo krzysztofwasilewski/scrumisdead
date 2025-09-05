@@ -15,5 +15,18 @@ export default defineConfig({
   build: {
     outDir: "dist",
     assetsDir: "assets",
+    sourcemap: false,
+    minify: "esbuild",
+    target: "es2020",
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+        format: "es",
+        inlineDynamicImports: true,
+      },
+    },
+  },
+  define: {
+    "process.env.NODE_ENV": '"production"',
   },
 });
