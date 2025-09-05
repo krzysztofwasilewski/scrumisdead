@@ -1,12 +1,24 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { Skull } from "lucide-react";
 import { motion } from "framer-motion";
 import PageTransition from "./components/PageTransition";
 
+// Component to scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 export default function Layout() {
   return (
     <div className="min-h-screen text-zinc-200">
+      <ScrollToTop />
       <header className="sticky top-0 z-40 border-b border-accent/50 bg-black/60 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex h-14 items-center justify-between">
