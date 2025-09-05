@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Skull } from "lucide-react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import PageTransition from "./components/PageTransition";
 
 // Component to scroll to top on route change
@@ -18,6 +19,33 @@ function ScrollToTop() {
 export default function Layout() {
   return (
     <div className="min-h-screen text-zinc-200">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Scrum is dead. Unagile.me",
+            url: "https://unagile.me",
+            description:
+              "Essays & artefacts from the edges of product and engineering — where process melts and learning hardens. Break the frame. Keep the signal.",
+            author: {
+              "@type": "Person",
+              name: "Unagile.me",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Unagile.me",
+              url: "https://unagile.me",
+            },
+            inLanguage: "en-US",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: "https://unagile.me/archive",
+              "query-input": "required name=search_term_string",
+            },
+          })}
+        </script>
+      </Helmet>
       <ScrollToTop />
       <header className="sticky top-0 z-40 border-b border-accent/50 bg-black/60 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4">

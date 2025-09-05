@@ -43,6 +43,35 @@ export default function Article() {
     <main className="min-h-screen">
       <Helmet>
         <title>{title} | Unagile.me</title>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: title,
+            url: `https://unagile.me/post/${entry.meta.slug}`,
+            datePublished: entry.meta.date,
+            dateModified: entry.meta.date,
+            author: {
+              "@type": "Person",
+              name: "Unagile.me",
+              url: "https://unagile.me",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Unagile.me",
+              url: "https://unagile.me",
+            },
+            description: entry.meta.excerpt || title,
+            articleSection: entry.meta.tag,
+            keywords: entry.meta.tag,
+            inLanguage: "en-US",
+            isPartOf: {
+              "@type": "Blog",
+              name: "Scrum is dead. Unagile.me",
+              url: "https://unagile.me",
+            },
+          })}
+        </script>
       </Helmet>
       <motion.div
         className="bg-grad-split border-b border-accent/50"

@@ -29,6 +29,30 @@ function AboutPage() {
     <div className="min-h-screen text-zinc-200">
       <Helmet>
         <title>About the Rebellion | Unagile.me</title>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Unagile.me",
+            url: "https://unagile.me",
+            description:
+              "Essays & artefacts from the edges of product and engineering — where process melts and learning hardens. Break the frame. Keep the signal.",
+            jobTitle: "Agile Process Critic & Product Engineering Consultant",
+            worksFor: {
+              "@type": "Organization",
+              name: "Unagile.me",
+            },
+            sameAs: ["https://scrumisdead.org"],
+            email: "chaos@scrumisdead.org",
+            knowsAbout: [
+              "Agile Development",
+              "Scrum",
+              "Product Management",
+              "Software Engineering",
+              "Process Innovation",
+            ],
+          })}
+        </script>
       </Helmet>
       <div className="mx-auto max-w-4xl px-4 py-20">
         {/* Hero Section */}

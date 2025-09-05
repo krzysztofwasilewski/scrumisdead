@@ -271,6 +271,39 @@ export default function Home() {
     <motion.main className="min-h-screen text-zinc-200">
       <Helmet>
         <title>Scrum is dead. Unagile.me</title>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Scrum is dead. Unagile.me",
+            url: "https://unagile.me",
+            description:
+              "Essays & artefacts from the edges of product and engineering — where process melts and learning hardens. Break the frame. Keep the signal.",
+            author: {
+              "@type": "Person",
+              name: "Unagile.me",
+              url: "https://unagile.me",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Unagile.me",
+              url: "https://unagile.me",
+            },
+            inLanguage: "en-US",
+            blogPost: posts.slice(0, 3).map((post) => ({
+              "@type": "BlogPosting",
+              headline: post.title,
+              url: `https://unagile.me/post/${post.slug}`,
+              datePublished: post.date,
+              dateModified: post.date,
+              author: {
+                "@type": "Person",
+                name: "Unagile.me",
+              },
+              description: post.excerpt || post.title,
+            })),
+          })}
+        </script>
       </Helmet>
       <Background />
 
