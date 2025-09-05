@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { getPost } from "../content";
 import { MDXProvider } from "@mdx-js/react";
 import { MDXComponents } from "../mdx/components";
@@ -23,6 +24,9 @@ export default function Article() {
   if (!entry) {
     return (
       <main className="mx-auto max-w-3xl px-4 py-20">
+        <Helmet>
+          <title>404 - Article Not Found | Unagile.me</title>
+        </Helmet>
         <h1 className="text-4xl font-black">404</h1>
         <p className="mt-2 text-zinc-400">No manifesto found.</p>
         <Link to="/" className="mt-6 inline-block underline text-accent">
@@ -37,6 +41,9 @@ export default function Article() {
 
   return (
     <main className="min-h-screen">
+      <Helmet>
+        <title>{title} | Unagile.me</title>
+      </Helmet>
       <motion.div
         className="bg-grad-split border-b border-accent/50"
         style={{ fontFamily: "inherit" }}

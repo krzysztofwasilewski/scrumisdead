@@ -2,6 +2,7 @@ import React from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { Skull, Flame, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Card, CardContent } from "../components/Card";
 import { Button } from "../components/Button";
 import { listPosts } from "../content";
@@ -268,6 +269,9 @@ export default function Home() {
 
   return (
     <motion.main className="min-h-screen text-zinc-200">
+      <Helmet>
+        <title>Scrum is dead. Unagile.me</title>
+      </Helmet>
       <Background />
 
       <header className="sticky top-0 z-40 border-b border-accent/50 bg-black/60 backdrop-blur">
