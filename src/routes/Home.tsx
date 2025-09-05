@@ -129,10 +129,17 @@ const FeaturedCard: React.FC<{
               <Flame className="h-3.5 w-3.5" /> {tag}
             </div>
           )}
-          <h3 className="text-xl md:text-2xl font-black text-zinc-100 leading-tight">
+          <h3
+            className="text-xl md:text-2xl font-black text-zinc-100 leading-tight"
+            style={{ lineHeight: 1.2 }}
+          >
             <HoverJitter>{title}</HoverJitter>
           </h3>
-          {excerpt && <p className="mt-3 text-zinc-300/90">{excerpt}</p>}
+          {excerpt && (
+            <p className="mt-3 text-zinc-300/90" style={{ lineHeight: 1.2 }}>
+              {excerpt}
+            </p>
+          )}
           <div className="mt-5">
             <Link to={`/post/${slug}`}>
               <Button variant="outline">Read Manifesto</Button>
@@ -270,17 +277,26 @@ export default function Home() {
                   <Card className="border-accent/70 bg-black/60 backdrop-blur-sm">
                     <CardContent className="p-0 overflow-hidden">
                       <div className="p-6">
-                        <h3 className="text-3xl font-black uppercase leading-none">
+                        <h3
+                          className="text-3xl font-black uppercase leading-none"
+                          style={{ lineHeight: 1.2 }}
+                        >
                           <HoverJitter>The Scrum Art</HoverJitter>
                         </h3>
-                        <p className="mt-3 text-sm text-zinc-300/90">
+                        <p
+                          className="mt-3 text-sm text-zinc-300/90"
+                          style={{ lineHeight: 1.2 }}
+                        >
                           Meetings, meetings, meetings. A million years past the
                           deadline.
                         </p>
                       </div>
                       <JaggedDivider />
                       <div className="p-6">
-                        <ul className="space-y-1 text-sm text-zinc-400">
+                        <ul
+                          className="space-y-1 text-sm text-zinc-400"
+                          style={{ lineHeight: 1.2 }}
+                        >
                           <li>
                             • Make sure your MVP has the best login screen.
                           </li>
