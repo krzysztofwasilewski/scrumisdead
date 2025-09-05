@@ -286,7 +286,8 @@ const Marquee: React.FC = () => {
       >
         {[...Array(6)].map((_, i) => (
           <span key={i} className="mx-6 text-accent">
-            ✶ no gods • no masters • no roadmaps • only signals
+            ✶ no gods • no masters • no roadmaps • only signals • project
+            management is a lie
           </span>
         ))}
       </motion.div>
@@ -340,7 +341,7 @@ export default function Home() {
               className="flex items-center gap-2 font-black tracking-widest uppercase"
             >
               <Skull className="h-5 w-5 text-accent" />
-              <span className="sr-only">Anarchic Blog</span>
+              <span className="sr-only">Please unagile me</span>
               <GlitchText text="SCRUM IS DEAD" />
             </a>
             <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -367,7 +368,7 @@ export default function Home() {
             <div className="md:col-span-7">
               <p className="mb-3 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-accent">
                 <Zap className="h-3.5 w-3.5" />
-                experimental blog
+                You are the elephant in the room
               </p>
               <motion.h1
                 className="text-[12vw] md:text-[8rem] leading-[0.85] font-black uppercase"
@@ -424,10 +425,15 @@ export default function Home() {
                       <JaggedDivider />
                       <div className="p-6">
                         <ul className="space-y-1 text-sm text-zinc-400">
-                          <li>• Start with the login screen</li>
-                          <li>• Leave the risky stuff for the last sprint</li>
-                          <li>• Collect technical debt</li>
-                          <li>• Pass rate 20%</li>
+                          <li>
+                            • Make sure your MVP is the best login screen.
+                          </li>
+                          <li>• Leave the innovation for the last sprint.</li>
+                          <li>• Collect technical debt.</li>
+                          <li>
+                            • Lower the bar to stay on schedule. Pass rate 20%
+                            is good enough as long as it's not your KPI
+                          </li>
                         </ul>
                       </div>
                     </CardContent>
@@ -466,7 +472,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-zinc-400">
           <div>
             <div className="flex items-center gap-2 font-black tracking-widest uppercase">
-              <Skull className="h-4 w-4 text-accent" /> ANARCHIC
+              <Skull className="h-4 w-4 text-accent" /> SCRUM is dead
             </div>
             <p className="mt-3 max-w-sm">
               No roadmaps, only feedback loops. No ceremonies, only
@@ -499,8 +505,19 @@ export default function Home() {
             <p className="text-zinc-500 uppercase tracking-widest mb-2">
               Contact
             </p>
-            <p>matrix://anarchy.blog</p>
-            <p className="mt-2">cc: chaos@anarchy.blog</p>
+            <p>
+              <a href="https://scrumisdead.org" className="hover:text-accent">
+                ☠ https://scrumisdead.org
+              </a>
+            </p>
+            <p className="mt-2">
+              <a
+                href="mailto:chaos@scrumisdead.org"
+                className="hover:text-accent"
+              >
+                ＠ chaos@scrumisdead.org
+              </a>
+            </p>
           </div>
         </div>
       </footer>
