@@ -142,35 +142,35 @@ const FeaturedCard: React.FC<{
         delay: 0.05 * index,
       }}
     >
-      <div
-        className={`group border-rose-700/60 bg-zinc-900/60 backdrop-blur-sm shadow-2xl shadow-black/30 transition-all duration-300 rounded-2xl border shadow ${
-          isHovered ? "border-rose-500/80 shadow-rose-500/20" : ""
-        }`}
-      >
-        <CardContent className="p-6">
-          {tag && (
-            <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-widest text-accent">
-              <Flame className="h-3.5 w-3.5" /> {tag}
-            </div>
-          )}
-          <h3
-            className="text-xl md:text-2xl font-black text-zinc-100 leading-tight"
-            style={{ lineHeight: 1.2 }}
-          >
-            <HoverJitter>{title}</HoverJitter>
-          </h3>
-          {excerpt && (
-            <p className="mt-3 text-zinc-300/90" style={{ lineHeight: 1.2 }}>
-              {excerpt}
-            </p>
-          )}
-          <div className="mt-5">
-            <Link to={`/post/${slug}`}>
+      <Link to={`/post/${slug}`} className="block">
+        <div
+          className={`group border-rose-700/60 bg-zinc-900/60 backdrop-blur-sm shadow-2xl shadow-black/30 transition-all duration-300 rounded-2xl border shadow cursor-pointer ${
+            isHovered ? "border-rose-500/80 shadow-rose-500/20" : ""
+          }`}
+        >
+          <CardContent className="p-6">
+            {tag && (
+              <div className="mb-2 flex items-center gap-2 text-xs uppercase tracking-widest text-accent">
+                <Flame className="h-3.5 w-3.5" /> {tag}
+              </div>
+            )}
+            <h3
+              className="text-xl md:text-2xl font-black text-zinc-100 leading-tight"
+              style={{ lineHeight: 1.2 }}
+            >
+              <HoverJitter>{title}</HoverJitter>
+            </h3>
+            {excerpt && (
+              <p className="mt-3 text-zinc-300/90" style={{ lineHeight: 1.2 }}>
+                {excerpt}
+              </p>
+            )}
+            <div className="mt-5">
               <Button variant="outline">Read Manifesto</Button>
-            </Link>
-          </div>
-        </CardContent>
-      </div>
+            </div>
+          </CardContent>
+        </div>
+      </Link>
       <div className="absolute -top-2 -left-2 rotate-[-6deg]">
         <div className="h-6 w-20 bg-rose-700/80 shadow-md" />
       </div>
