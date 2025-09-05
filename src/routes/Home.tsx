@@ -374,7 +374,7 @@ export default function Home() {
                           <li>• Accumulate technical debt.</li>
                           <li>
                             • Lower the bar to stay on schedule. Pass rate 20%
-                            is good enough as long as it's not your KPI
+                            is good enough as long as it’s not your KPI
                           </li>
                         </ul>
                       </div>

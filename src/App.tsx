@@ -43,13 +43,13 @@ const router = createBrowserRouter([
                     transition={{ duration: 0.6, delay: 0.2 }}
                   >
                     <h2 className="text-2xl font-black uppercase text-accent mb-4">
-                      ☠ The Problem
+                      The Problem
                     </h2>
                     <p className="text-lg text-zinc-300 leading-relaxed">
-                      I've been trapped in the SCRUM industrial complex for 23
+                      I’ve been trapped in the SCRUM industrial complex for 23
                       years in roles such as a software developer, project
                       manager, team manager, scrum master, product owner, agile
-                      coach, director of operations, and C level exec. Watched
+                      coach, director of operations, and C-level exec. Watched
                       it metastasize from a simple framework into a hollow shell
                       that values ceremony over outcomes, process over people.
                     </p>
@@ -61,10 +61,10 @@ const router = createBrowserRouter([
                     transition={{ duration: 0.6, delay: 0.4 }}
                   >
                     <h2 className="text-2xl font-black uppercase text-accent mb-4">
-                      🔥 The Mission
+                      The Mission
                     </h2>
                     <p className="text-lg text-zinc-300 leading-relaxed">
-                      This madness needs to stop. No more fakesprint planning.
+                      This madness needs to stop. No more fake sprint planning.
                       No more retrospective lip service. Time to burn the
                       backlog and build what matters.
                     </p>
@@ -76,10 +76,10 @@ const router = createBrowserRouter([
                     transition={{ duration: 0.6, delay: 0.6 }}
                   >
                     <h2 className="text-2xl font-black uppercase text-accent mb-4">
-                      ⚡ The Call
+                      The Call
                     </h2>
                     <p className="text-lg text-zinc-300 leading-relaxed">
-                      Ready to unagile your organization? Let's talk about what
+                      Ready to unagile your organization? Let’s talk about what
                       actually works when you stop pretending that process
                       innovation is the same as product innovation.
                     </p>
@@ -116,10 +116,7 @@ const router = createBrowserRouter([
                           <span className="text-accent font-black">02</span>
                           <span>Meetings are a tax on productivity.</span>
                         </li>
-                        <li className="flex items-start gap-3">
-                          <span className="text-accent font-black">03</span>
-                          <span>Velocity is a vanity metric.</span>
-                        </li>
+
                         <li className="flex items-start gap-3">
                           <span className="text-accent font-black">04</span>
                           <span>
@@ -144,8 +141,8 @@ const router = createBrowserRouter([
                 transition={{ duration: 0.6, delay: 0.8 }}
               >
                 <p className="text-xl text-zinc-400 mb-6">
-                  "The best way to predict the future is to build it. The best
-                  way to build it is to stop pretending you can plan it."
+                  “The best way to predict the future is to build it. The best
+                  way to build it is to stop pretending you can plan it.”
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <a

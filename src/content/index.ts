@@ -14,21 +14,21 @@ const frontmatterData: Record<string, Omit<PostMeta, "slug">> = {
     date: "2025-08-19",
     tag: "process",
     excerpt:
-      "Daily rituals became theater. Here's how to reclaim intent without the script.",
+      "Daily rituals became theater. Here’s how to reclaim intent without the script.",
   },
   "scope-delusion": {
     title: "The Scope Delusion",
     date: "2025-07-02",
     tag: "culture",
     excerpt:
-      "When scope is locked from the start, incremental delivery becomes a joke. Here's why honesty matters.",
+      "When scope is locked from the start, incremental delivery becomes a joke. Here’s why honesty matters.",
   },
   "kanban-is-not-what-you-do": {
     title: "Kanban Came Cheap",
     date: "2025-09-05",
     tag: "process",
     excerpt:
-      "Kanban isn’t Scrum minus sprints. It’s discipline disguised as flow—and too often, abused as an excuse.",
+      "Kanban isn’t Scrum minus sprints. It’s discipline disguised as flow — and too often, abused as an excuse.",
   },
 };
 
