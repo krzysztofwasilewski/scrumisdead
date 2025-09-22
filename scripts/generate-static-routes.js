@@ -37,10 +37,19 @@ function ensureDir(path) {
   mkdirSync(path, { recursive: true });
 }
 
+function rewriteAssetsToAbsolute(html) {
+  // Ensure nested routes load assets from site root
+  return html
+    .replaceAll('src="./assets/', 'src="/assets/')
+    .replaceAll('href="./assets/', 'href="/assets/')
+    .replaceAll('href="./favicon', 'href="/favicon');
+}
+
 function writeRouteHtml(routePath, html) {
   const fullDir = join(BUILD_DIR, routePath);
   ensureDir(fullDir);
-  writeFileSync(join(fullDir, "index.html"), html);
+  const routedHtml = rewriteAssetsToAbsolute(html);
+  writeFileSync(join(fullDir, "index.html"), routedHtml);
 }
 
 function main() {
